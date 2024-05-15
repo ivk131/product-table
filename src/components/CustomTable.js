@@ -28,7 +28,6 @@ export default function CustomTable() {
 
   const handleChange = (event) => {
     setLimit(event.target.value);
-    console.log("event.target.value", event.target.value);
   };
 
   const fetchProducts = async () => {
@@ -37,8 +36,6 @@ export default function CustomTable() {
     );
 
     const data = await response.json();
-
-    console.log("data", data);
     setProducts(data);
   };
 
@@ -78,7 +75,10 @@ export default function CustomTable() {
         handleCloseProductDetails={handleCloseProductDetails}
         product={product}
       />
-      <AddNewProduct OpenModalToAddProduct={OpenModalToAddProduct} handleCloseAddProduct={handleCloseAddProduct} />
+      <AddNewProduct
+        OpenModalToAddProduct={OpenModalToAddProduct}
+        handleCloseAddProduct={handleCloseAddProduct}
+      />
       <Box
         mb={2}
         sx={{ display: "flex", justifyContent: "space-between", gap: "24px" }}

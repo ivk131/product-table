@@ -1,6 +1,5 @@
 import { Modal, Typography, TextField, Grid, Box, Button } from "@mui/material";
 import React, { useState } from "react";
-import Stack from "@mui/material/Stack";
 import axios from "axios";
 
 const style = {
@@ -16,44 +15,40 @@ const style = {
 };
 
 function AddNewProduct({ OpenModalToAddProduct, handleCloseAddProduct }) {
-
-    const [productDetail,setproductDetail] = useState({
-        title:"",
-        description:"",
-        price:"",
-        image:"",
-        category:""
-    })
+  const [productDetail, setproductDetail] = useState({
+    title: "",
+    description: "",
+    price: "",
+    image: "",
+    category: "",
+  });
   const handleSubmit = (event) => {
     event.PreventDefault();
-    console.log("Data",productDetail);
-    axios.post("https://fakestoreapi.com/products",productDetail).catch((error)=>console.log('"Failed to Add product"',error))
+    axios
+      .post("https://fakestoreapi.com/products", productDetail)
+      .catch((error) => console.log('"Failed to Add product"', error));
 
-    setTimeout(()=>{
-        handleCloseAddProduct()
-    },3000)
-
+    setTimeout(() => {
+      handleCloseAddProduct();
+    }, 3000);
   };
 
-  const handleInputChnage=(event)=>{
-    setproductDetail({...productDetail,[event.target.name]:event.target.value})
-  }
-
-  const handleClose=()=>{
-
-  }
+  const handleInputChnage = (event) => {
+    setproductDetail({
+      ...productDetail,
+      [event.target.name]: event.target.value,
+    });
+  };
 
   return (
-     
     <Modal
-    //    onClose={handleCloseAddProduct}
       open={OpenModalToAddProduct}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
       <Box>
         <Box sx={style}>
-          <form onSubmit={ ()=> handleSubmit()}>
+          <form onSubmit={() => handleSubmit()}>
             <Grid container maxWidth="sm" spacing={3}>
               <Grid item xs={12}>
                 <TextField
@@ -73,7 +68,6 @@ function AddNewProduct({ OpenModalToAddProduct, handleCloseAddProduct }) {
                   name="description"
                   label="Description"
                   onChange={handleInputChnage}
-
                 />
               </Grid>
               <Grid item xs={12}>
@@ -84,7 +78,6 @@ function AddNewProduct({ OpenModalToAddProduct, handleCloseAddProduct }) {
                   name="price"
                   label="Price"
                   onChange={handleInputChnage}
-
                 />
               </Grid>
               <Grid item xs={12}>
@@ -95,22 +88,19 @@ function AddNewProduct({ OpenModalToAddProduct, handleCloseAddProduct }) {
                   name="category"
                   label="Category"
                   onChange={handleInputChnage}
-
                 />
               </Grid>
 
               <Grid item xs={12}>
-              <TextField
+                <TextField
                   fullWidth
                   type="file"
                   placeholder="Select image"
                   value={productDetail.image}
                   name="image"
                   onChange={handleInputChnage}
-
                 />
               </Grid>
-
             </Grid>
 
             <Box mt={3}>
